@@ -1,6 +1,6 @@
 # Ultimate Plus
 
-An overhaul of Super Smash Bros. Ultimate that aims to improve the bare minimal, as well as the general feel of the game.
+An overhaul of Super Smash Bros. Ultimate that aims to revise and add mechanics.
 If you want to contribute to Ultimate Plus, pull requests are welcome!
 
 
