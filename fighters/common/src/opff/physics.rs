@@ -20,29 +20,6 @@ pub unsafe fn get_player_number(boma: &mut smash::app::BattleObjectModuleAccesso
     return WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 }
 
-const PIVOT_STICK_SNAPBACK_WINDOW: f32 = 2.0;
-unsafe fn pivots(boma: &mut BattleObjectModuleAccessor, status_kind: i32, stick_value_x: f32, curr_frame: f32){
-
-    // Get the pivot boost amount for the current character
-    let dash_speed: f32 = WorkModule::get_param_float(boma, hash40("dash_speed"), 0);
-    let mut pivot_boost: smash::phx::Vector3f = smash::phx::Vector3f {x: dash_speed * 0.75, y: 0.0, z: 0.0};
-    if status_kind == *FIGHTER_STATUS_KIND_TURN_DASH
-        && curr_frame <= PIVOT_STICK_SNAPBACK_WINDOW && stick_value_x == 0.0
-        && [*FIGHTER_STATUS_KIND_TURN_DASH, *FIGHTER_STATUS_KIND_DASH].contains(&StatusModule::prev_status_kind(boma, 0))
-        && ![*FIGHTER_STATUS_KIND_WAIT, *FIGHTER_STATUS_KIND_TURN].contains(&StatusModule::prev_status_kind(boma, 1))
-    {
-        
-        if curr_frame == 3.0 {
-            pivot_boost.x = dash_speed * 0.35; // Reduce pivot speed boost if on the last frame of pivot leniency
-        }
-        
-        PostureModule::reverse_lr(boma);
-        StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_TURN,true);
-        KineticModule::clear_speed_all(boma);
-        KineticModule::add_speed(boma, &pivot_boost);
-    }
-}
-
 unsafe fn double_shield_button_airdodge(boma: &mut BattleObjectModuleAccessor, status_kind: i32, situation_kind: i32, cat1: i32) {
     // airdodge with second shield button while holding another shield button
     if boma.is_situation(*SITUATION_KIND_AIR)
@@ -65,6 +42,7 @@ unsafe fn double_shield_button_airdodge(boma: &mut BattleObjectModuleAccessor, s
 }
 
 pub unsafe fn run(fighter: &mut L2CFighterCommon, boma: &mut BattleObjectModuleAccessor, cat: [i32 ; 4], status_kind: i32, situation_kind: i32, fighter_kind: i32, stick_x: f32, stick_y: f32, facing: f32, curr_frame: f32) {
+
     double_shield_button_airdodge(boma, status_kind, situation_kind, cat[0]);
 
 }
