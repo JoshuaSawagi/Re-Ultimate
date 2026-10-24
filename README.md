@@ -3,6 +3,7 @@
 A mod pack of Super Smash Bros. Ultimate that with add mechanics.
 If you want to contribute to Re:Ultimate (Ultimate Revival), pull requests are welcome!
 
+Changelog: https://docs.google.com/document/d/1DwDjlTrylgeAsLCDBbUH1ND-EkcN3mpMlnUCvXsrh70/edit?usp=sharing
 
 
 
